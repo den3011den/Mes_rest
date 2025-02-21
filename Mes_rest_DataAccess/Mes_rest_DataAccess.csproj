@@ -18,8 +18,4 @@
     <ProjectReference Include="..\Mes_rest_Common\Mes_rest_Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DataModels\" />
-  </ItemGroup>
-
 </Project>

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Mes_rest_DataAccess.DataModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mes_rest_DataAccess
 {
@@ -15,14 +16,14 @@ namespace Mes_rest_DataAccess
         }
 
         /// <summary>
-        /// Авторы
+        /// Тэги
         /// </summary>
-        //public DbSet<Author> Authors { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         /// <summary>
-        /// Книги
+        /// Значения тэгов
         /// </summary>
-        //public DbSet<Book> Books { get; set; }
+        public DbSet<TagValue> TagValues { get; set; }
 
     }
 
