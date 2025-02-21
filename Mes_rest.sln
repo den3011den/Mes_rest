@@ -5,13 +5,13 @@ VisualStudioVersion = 17.13.35818.85 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mes_rest_WebAPI", "Mes_rest_WebAPI\Mes_rest_WebAPI.csproj", "{3EC0DAB6-90BA-4B4C-A920-1A93AFB40970}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_rest_Business", "Web_rest_Business\Web_rest_Business.csproj", "{724F75AF-4273-4A16-AAD3-0373F8F8BD8C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mes_rest_Business", "Mes_rest_Business\Mes_rest_Business.csproj", "{724F75AF-4273-4A16-AAD3-0373F8F8BD8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_rest_Common", "Web_rest_Common\Web_rest_Common.csproj", "{F9910450-B0DB-49D8-91DD-9B793A6FEF19}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mes_rest_Common", "Mes_rest_Common\Mes_rest_Common.csproj", "{F9910450-B0DB-49D8-91DD-9B793A6FEF19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_rest_DataAccess", "Web_rest_DataAccess\Web_rest_DataAccess.csproj", "{AF392DD5-31F0-415A-8895-B21F1EC2F92D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mes_rest_DataAccess", "Mes_rest_DataAccess\Mes_rest_DataAccess.csproj", "{AF392DD5-31F0-415A-8895-B21F1EC2F92D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_rest_Models", "Web_rest_Models\Web_rest_Models.csproj", "{3E0F5E90-E94B-40D8-92E9-024C4AF97FD6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mes_rest_Models", "Mes_rest_Models\Mes_rest_Models.csproj", "{3E0F5E90-E94B-40D8-92E9-024C4AF97FD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
