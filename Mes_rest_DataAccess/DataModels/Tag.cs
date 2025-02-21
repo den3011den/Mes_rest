@@ -23,21 +23,21 @@ namespace Mes_rest_DataAccess.DataModels
         [Comment("Наименование тэга")]
         [Column("name")]
         [Required(ErrorMessage = "Наименование не может быть пустым")]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
         /// <summary>
         /// Описание
         /// </summary>
         [Comment("Описание")]
         [Column("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; } = "";
 
         /// <summary>
         /// Единицы измерения
         /// </summary>
         [Comment("Ед. измерения")]
         [Column("engunits")]
-        public string Engunits { get; set; }
+        public string Engunits { get; set; } = "";
 
     }
 }

@@ -5,11 +5,15 @@ namespace Mes_rest_DataAccess
 {
 
     /// <summary>
-    /// DbContext
+    /// Контекст БД
     /// </summary>
     public class ApplicationDbContext : DbContext
     {
 
+        /// <summary>
+        /// Конструктор контекста БД
+        /// </summary>
+        /// <param name="options"></param>
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
