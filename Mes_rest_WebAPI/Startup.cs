@@ -1,5 +1,9 @@
-﻿using Mes_rest_Common;
+﻿using Mes_rest_Business.Repository;
+using Mes_rest_Business.Repository.IRepository;
+using Mes_rest_Common;
 using Mes_rest_DataAccess;
+using Mes_rest_Models.Mes_restModels;
+using Mes_rest_WebAPI.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
@@ -25,20 +29,15 @@ namespace Mes_rest_WebAPI
             services.AddSwaggerGen(c =>
             {
                 // include API xml documentation
-                //var apiAssembly = typeof(AuthorsController).Assembly;
-                //c.IncludeXmlComments(GetXmlDocumentationFileFor(apiAssembly));
+                var apiAssembly = typeof(TagsController).Assembly;
+                c.IncludeXmlComments(GetXmlDocumentationFileFor(apiAssembly));
 
-                //apiAssembly = typeof(PublishersController).Assembly;
-                //c.IncludeXmlComments(GetXmlDocumentationFileFor(apiAssembly));
-
-                //apiAssembly = typeof(StatesController).Assembly;
-                //c.IncludeXmlComments(GetXmlDocumentationFileFor(apiAssembly));
+                apiAssembly = typeof(TagValuesController).Assembly;
+                c.IncludeXmlComments(GetXmlDocumentationFileFor(apiAssembly));
 
                 // include models xml documentation
-                //var modelsAssembly = typeof(Catalog_Models.CatalogModels.Author.AuthorItemCreateUpdateRequest).Assembly;
-                //c.IncludeXmlComments(GetXmlDocumentationFileFor(modelsAssembly));
-                //modelsAssembly = typeof(Catalog_Models.CatalogModels.Author.AuthorItemResponse).Assembly;
-                //c.IncludeXmlComments(GetXmlDocumentationFileFor(modelsAssembly));
+                var modelsAssembly = typeof(TagResponse).Assembly;
+                c.IncludeXmlComments(GetXmlDocumentationFileFor(modelsAssembly));
 
                 //modelsAssembly = typeof(Catalog_Models.CatalogModels.Publisher.PublisherItemCreateUpdateRequest).Assembly;
                 //c.IncludeXmlComments(GetXmlDocumentationFileFor(modelsAssembly));
@@ -55,12 +54,8 @@ namespace Mes_rest_WebAPI
             });
 
 
-            //services.AddScoped<IStateRepository, StateRepository>();
-            //services.AddScoped<IAuthorRepository, AuthorRepository>();
-            //services.AddScoped<IBookRepository, BookRepository>();
-            //services.AddScoped<IBookInstanceRepository, BookInstanceRepository>();
-            //services.AddScoped<IBookToAuthorRepository, BookToAuthorRepository>();
-            //services.AddScoped<IPublisherRepository, PublisherRepository>();            
+            services.AddScoped<ITagRepository, TagRepository>();
+            services.AddScoped<ITagValueRepository, TagValueRepository>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

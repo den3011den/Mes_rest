@@ -8,12 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Mes_rest_DataAccess\Mes_rest_DataAccess.csproj" />
-    <ProjectReference Include="..\Mes_rest_Models\Mes_rest_Models.csproj" />
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mapper\" />
+    <ProjectReference Include="..\Mes_rest_DataAccess\Mes_rest_DataAccess.csproj" />
+    <ProjectReference Include="..\Mes_rest_Models\Mes_rest_Models.csproj" />
   </ItemGroup>
 
 </Project>

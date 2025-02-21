@@ -24,8 +24,4 @@
     <ProjectReference Include="..\Mes_rest_Models\Mes_rest_Models.csproj" />    
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
