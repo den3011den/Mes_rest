@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace Mes_rest_Models.Mes_restModels
 {
@@ -31,14 +32,27 @@ namespace Mes_rest_Models.Mes_restModels
         /// Метка времени значения
         /// </summary>        
         [DisplayName("Метка времени значения")]
+        [JsonIgnore]
         public DateTime TagValueTime { get; set; }
 
+        /// <summary>
+        /// Метка времени значения
+        /// </summary>        
+        [DisplayName("Метка времени значения")]
+        public string TagValueTimeStr { get; set; }
 
         /// <summary>
         /// Метка времени регистрации записи о значении в БД
         /// </summary>                
         [DisplayName("Метка времени регистрации записи о значении в БД")]
+        [JsonIgnore]
         public DateTime TagValueRegTime { get; set; }
+
+        /// <summary>
+        /// Метка времени регистрации записи о значении в БД
+        /// </summary>                
+        [DisplayName("Метка времени регистрации записи о значении в БД")]
+        public string TagValueRegTimeStr { get; set; }
 
 
         /// <summary>

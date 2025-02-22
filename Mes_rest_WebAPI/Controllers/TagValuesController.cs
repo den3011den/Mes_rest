@@ -38,13 +38,36 @@ namespace Mes_rest_WebAPI.Controllers
         /// Получить значения тэга по его имени и за указанный интревал времени
         /// </summary>
         /// <param name="tagname">Имя тэга</param>
-        /// <param name="startTime">Время начала интревала дат</param>
-        /// <param name="endTime">Время окончания интервала дат</param>
+        /// <param name="startTime">
+        /// 
+        /// <details>
+        /// <summary>Время начала интервала дат.
+        /// </summary>
+        /// <br />
+        /// 
+        /// Используйте локальное время сервера.        
+        /// Для ввода времени используйте формат: YYYY-MM-DDTHH:MM:SS.mmmZ        
+        /// Пример: 2025-02-22T12:19:20.102Z  (для даты: 22 февраля 2025 года 12 часов 19 минут 20 секунд 102 миллисекунды)        
+        /// </details>
+        /// </param> 
+        /// 
+        /// <param name="endTime">
+        /// 
+        /// <details>
+        /// <summary>Время окончания интервала дат.
+        /// </summary>
+        /// <br />
+        /// 
+        /// Используйте локальное время сервера.        
+        /// Для ввода времени используйте формат: YYYY-MM-DDTHH:MM:SS.mmmZ        
+        /// Пример: 2025-02-22T12:19:20.102Z  (для даты: 22 февраля 2025 года 12 часов 19 минут 20 секунд 102 миллисекунды)        
+        /// </details>
+        /// </param> 
         /// <returns>Список найденых значений - объектов типа TagValueResponse</returns>
         /// <response code="200">Успешное выполнение.</response>
         /// <response code="400">Неверные параметры запроса. Подробности - в строке ответа</response>  
         /// <response code="404">Не удалось найти найти тэг или значения за указанный интревал времени</response>  
-        [HttpGet("GetByTagNameAndTagValueTimeInterval/{tagname:alpha}/{startTime:datetime}/{endTime:datetime}")]
+        [HttpGet("GetByTagNameAndTagValueTimeInterval/{tagname}/{startTime:datetime}/{endTime:datetime}")]
         [ProducesResponseType(typeof(List<TagValueResponse>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
@@ -73,8 +96,31 @@ namespace Mes_rest_WebAPI.Controllers
         /// <summary>
         /// Получить значения тэгов за указанный интревал времени
         /// </summary>        
-        /// <param name="startTime">Время начала интревала дат</param>
-        /// <param name="endTime">Время окончания интервала дат</param>
+        /// <param name="startTime">
+        /// 
+        /// <details>
+        /// <summary>Время начала интервала дат.
+        /// </summary>
+        /// <br />
+        /// 
+        /// Используйте локальное время сервера.        
+        /// Для ввода времени используйте формат: YYYY-MM-DDTHH:MM:SS.mmmZ        
+        /// Пример: 2025-02-22T12:19:20.102Z  (для даты: 22 февраля 2025 года 12 часов 19 минут 20 секунд 102 миллисекунды)        
+        /// </details>
+        /// </param> 
+        /// 
+        /// <param name="endTime">
+        /// 
+        /// <details>
+        /// <summary>Время окончания интервала дат.
+        /// </summary>
+        /// <br />
+        /// 
+        /// Используйте локальное время сервера.        
+        /// Для ввода времени используйте формат: YYYY-MM-DDTHH:MM:SS.mmmZ        
+        /// Пример: 2025-02-22T12:19:20.102Z  (для даты: 22 февраля 2025 года 12 часов 19 минут 20 секунд 102 миллисекунды)        
+        /// </details>
+        /// </param> 
         /// <returns>Список найденых значений - объектов типа TagValueResponse</returns>
         /// <response code="200">Успешное выполнение.</response>
         /// <response code="400">Неверные параметры запроса. Подробности - в строке ответа</response>  
@@ -99,15 +145,26 @@ namespace Mes_rest_WebAPI.Controllers
 
 
         /// <summary>
-        /// Получить значения тэга по имени и указанной метке времени
+        /// Получить значения тэга по имени и указанной метке времени (ищет значения тэга с начала и до окончания секунды, в которую попадает указанная метка времени)
         /// </summary>        
-        /// <param name="tagname">Имя тэга</param>
-        /// <param name="tagValueTime">Метка вермени</param>        
+        /// <param name="tagname">Имя тэга</param>        
+        /// <param name="tagValueTime">
+        /// 
+        /// <details>
+        /// <summary>Метка врeмени
+        /// </summary>
+        /// <br />
+        /// 
+        /// Используйте локальное время сервера.        
+        /// Для ввода времени используйте формат: YYYY-MM-DDTHH:MM:SS.mmmZ        
+        /// Пример: 2025-02-22T12:19:20.102Z  (для даты: 22 февраля 2025 года 12 часов 19 минут 20 секунд 102 миллисекунды)        
+        /// </details>
+        /// </param> 
         /// <returns>Список найденых значений - объектов типа TagValueResponse</returns>
         /// <response code="200">Успешное выполнение.</response>
         /// <response code="400">Неверные параметры запроса. Подробности - в строке ответа</response>  
         /// <response code="404">Не удалось найти найти значения на указаную метку времени</response>  
-        [HttpGet("GetByTagNameAndTagValueTime/{tagname:alpha}/{tagValueTime:datetime}")]
+        [HttpGet("GetByTagNameAndTagValueTime/{tagname}/{tagValueTime:datetime}")]
         [ProducesResponseType(typeof(List<TagValueResponse>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]

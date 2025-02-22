@@ -25,7 +25,7 @@ namespace Mes_rest_Business.Repository
         /// <returns>Найденный тэг</returns>
         public async Task<Tag> GetByNameAsync(string tagname)
         {
-            var tag = await _db.Tags.FirstOrDefaultAsync(u => u.Name == tagname);
+            var tag = await _db.Tags.FirstOrDefaultAsync(u => u.Name.Trim().ToUpper() == tagname.Trim().ToUpper());
             return tag;
         }
 
@@ -36,7 +36,7 @@ namespace Mes_rest_Business.Repository
         /// <returns>Список найденых тэгов</returns>
         public async Task<IEnumerable<Tag>> GetByPartOfNameAsync(string partOfTagName)
         {
-            var tagList = await _db.Tags.Where(u => u.Name.Contains(partOfTagName)).ToListAsync();
+            var tagList = await _db.Tags.Where(u => u.Name.Trim().ToUpper().Contains(partOfTagName.Trim().ToUpper())).ToListAsync();
             return tagList;
         }
     }

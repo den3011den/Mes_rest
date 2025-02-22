@@ -27,12 +27,17 @@ namespace Mes_rest_Business.Repository
         /// <returns>Список значений тэга за секунду, в которую попадает указанная метка времени</returns>
         public async Task<IEnumerable<TagValue>> GetByTagNameAndTagValueTimeAsync(string tagname, DateTime tagValueTime)
         {
-            tagValueTime = tagValueTime.ToUniversalTime();
-            DateTime startTagValueTime = tagValueTime.AddMilliseconds(-tagValueTime.Millisecond);
-            DateTime endTagValueTime = startTagValueTime.AddSeconds(1);
+
+            DateTime tagValueTimeLocal = DateTime.SpecifyKind(tagValueTime, DateTimeKind.Local);
+            DateTime tagValueTimeUTC = tagValueTimeLocal.ToUniversalTime();
+
+
+            DateTime startTagValueTimeUTC = tagValueTimeUTC.AddMilliseconds(-tagValueTimeUTC.Millisecond);
+            DateTime endTagValueTimeUTC = startTagValueTimeUTC.AddSeconds(1);
             var tagValueList = await _db.TagValues
                 .Include("Tag")
-                .Where(u => u.Tag.Name == tagname && u.TagValueTime >= startTagValueTime && u.TagValueTime < endTagValueTime)
+                .Where(u => u.Tag.Name.Trim().ToUpper() == tagname.Trim().ToUpper() && u.TagValueTime >= startTagValueTimeUTC && u.TagValueTime < endTagValueTimeUTC)
+                .OrderBy(u => u.TagValueTime)
                 .ToListAsync();
             return tagValueList;
         }
@@ -47,12 +52,16 @@ namespace Mes_rest_Business.Repository
         /// <returns>Список найденых значений тэгов</returns>
         public async Task<IEnumerable<TagValue>> GetByTagNameAndTagValueTimeIntervalAsync(string tagname, DateTime startTime, DateTime endTime)
         {
-            startTime = startTime.ToUniversalTime();
-            endTime = endTime.ToUniversalTime();
+            DateTime startTimeLocal = DateTime.SpecifyKind(startTime, DateTimeKind.Local);
+            DateTime startTimeUTC = startTimeLocal.ToUniversalTime();
+
+            DateTime endTimeLocal = DateTime.SpecifyKind(endTime, DateTimeKind.Local);
+            DateTime endTimeUTC = endTimeLocal.ToUniversalTime();
 
             var tagValueList = await _db.TagValues
                     .Include("Tag")
-                    .Where(u => u.Tag.Name == tagname && u.TagValueTime >= startTime && u.TagValueTime <= endTime)
+                    .Where(u => u.Tag.Name.Trim().ToUpper() == tagname.Trim().ToUpper() && u.TagValueTime >= startTimeUTC && u.TagValueTime <= endTimeUTC)
+                    .OrderBy(u => u.TagValueTime)
                     .ToListAsync();
             return tagValueList;
         }
@@ -66,12 +75,18 @@ namespace Mes_rest_Business.Repository
         /// <returns>Список найденых значений тэгов</returns>
         public async Task<IEnumerable<TagValue>> GetByTagValueTimeIntervalAsync(DateTime startTime, DateTime endTime)
         {
-            startTime = startTime.ToUniversalTime();
-            endTime = endTime.ToUniversalTime();
+
+            DateTime startTimeLocal = DateTime.SpecifyKind(startTime, DateTimeKind.Local);
+            DateTime startTimeUTC = startTimeLocal.ToUniversalTime();
+
+            DateTime endTimeLocal = DateTime.SpecifyKind(endTime, DateTimeKind.Local);
+            DateTime endTimeUTC = endTimeLocal.ToUniversalTime();
 
             var tagValueList = await _db.TagValues
                 .Include("Tag")
-                .Where(u => u.TagValueTime >= startTime && u.TagValueTime <= endTime)
+                .Where(u => u.TagValueTime >= startTimeUTC && u.TagValueTime <= endTimeUTC)
+                .OrderBy(u => u.TagValueTime)
+                .ThenBy(u => u.Tag.Name)
                 .ToListAsync();
             return tagValueList;
         }

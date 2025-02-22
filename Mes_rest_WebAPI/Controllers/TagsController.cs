@@ -52,7 +52,7 @@ namespace Mes_rest_WebAPI.Controllers
         /// <returns>Возвращает найденый по ИД тэг - объект типа TagResponse</returns>
         /// <response code="200">Успешное выполнение</response>
         /// <response code="404">Тэг с заданным Id не найден</response>
-        [HttpGet("{id:Int64}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(typeof(TagResponse), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<TagResponse>> GetTagByIdAsync(Int64 id)
@@ -72,7 +72,7 @@ namespace Mes_rest_WebAPI.Controllers
         /// <returns>Возвращает найденый по наименованию тэг - объект типа TagResponse</returns>
         /// <response code="200">Успешное выполнение</response>
         /// <response code="404">Тэг с заданным наименованием не найден</response>
-        [HttpGet("GetByName/{name:alpha}")]
+        [HttpGet("GetByName/{name}")]
         [ProducesResponseType(typeof(TagResponse), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<TagResponse>> GetTagByNameAsync(string name)
@@ -93,7 +93,7 @@ namespace Mes_rest_WebAPI.Controllers
         /// <returns>Возвращает список найденых тэгов - объекты типа TagResponse</returns>
         /// <response code="200">Успешное выполнение</response>
         /// <response code="404">Тэги с заданой подстрокой  в наименовании не найдены</response>
-        [HttpGet("GetByPartOfName/{partOfName:alpha}")]
+        [HttpGet("GetByPartOfName/{partOfName}")]
         [ProducesResponseType(typeof(List<TagResponse>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<List<TagResponse>>> GetTagByPartOfNameAsync(string partOfName)

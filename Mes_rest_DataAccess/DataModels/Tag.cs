@@ -15,7 +15,7 @@ namespace Mes_rest_DataAccess.DataModels
         /// </summary>
         [Comment("ИД родителя")]
         [Column("parent")]
-        public Int64 ParentId { get; set; }
+        public Int64? ParentId { get; set; }
 
         /// <summary>
         /// Наименование тэга
