@@ -4,11 +4,15 @@ using Mes_rest_Models.Mes_restModels;
 
 namespace Mes_rest_Business.Mapper
 {
+
+    /// <summary>
+    /// Маппинг перевода значений классов из одного в другой
+    /// </summary>
     public class MappingProfile : Profile
     {
 
         /// <summary>
-        /// Паппинг перевода значений классов из одного в другой
+        /// Маппинг перевода значений классов из одного в другой
         /// </summary>
         public MappingProfile()
         {

@@ -19,6 +19,13 @@ namespace Mes_rest_WebAPI.Controllers
         private readonly ITagRepository _tagRepository;
         private readonly IMapper _mapper;
 
+
+        /// <summary>
+        /// Конструктор контроллера по работе со значениями тэгов
+        /// </summary>
+        /// <param name="tagValueRepository">Репозиторий методов для работы со значениями тэгов в БД</param>
+        /// <param name="tagRepository">Репозиторий методов для работы с тэгами в БД</param>
+        /// <param name="mapper">Маппер сущностей БД в объекты моделей ответов в действиях контроллеров</param>
         public TagValuesController(ITagValueRepository tagValueRepository, ITagRepository tagRepository, IMapper mapper)
         {
             _tagValueRepository = tagValueRepository;

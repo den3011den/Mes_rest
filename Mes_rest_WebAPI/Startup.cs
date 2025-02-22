@@ -2,6 +2,7 @@
 using Mes_rest_Business.Repository.IRepository;
 using Mes_rest_Common;
 using Mes_rest_DataAccess;
+using Mes_rest_DataAccess.DataModels;
 using Mes_rest_Models.Mes_restModels;
 using Mes_rest_WebAPI.Controllers;
 using Microsoft.EntityFrameworkCore;
@@ -52,20 +53,18 @@ namespace Mes_rest_WebAPI
                 c.IncludeXmlComments(GetXmlDocumentationFileFor(apiAssembly));
 
                 // include models xml documentation
-                var modelsAssembly = typeof(TagResponse).Assembly;
+                var modelsAssembly = typeof(Tag).Assembly;
+                c.IncludeXmlComments(GetXmlDocumentationFileFor(modelsAssembly));
+                // include models xml documentation
+                modelsAssembly = typeof(TagResponse).Assembly;
                 c.IncludeXmlComments(GetXmlDocumentationFileFor(modelsAssembly));
 
-                //modelsAssembly = typeof(Catalog_Models.CatalogModels.Publisher.PublisherItemCreateUpdateRequest).Assembly;
-                //c.IncludeXmlComments(GetXmlDocumentationFileFor(modelsAssembly));
-                //modelsAssembly = typeof(Catalog_Models.CatalogModels.Publisher.PublisherItemResponse).Assembly;
-                //c.IncludeXmlComments(GetXmlDocumentationFileFor(modelsAssembly));
-
-                //modelsAssembly = typeof(Catalog_Models.CatalogModels.State.StateItemCreateRequest).Assembly;
-                //c.IncludeXmlComments(GetXmlDocumentationFileFor(modelsAssembly));
-                //modelsAssembly = typeof(Catalog_Models.CatalogModels.State.StateItemResponse).Assembly;
-                //c.IncludeXmlComments(GetXmlDocumentationFileFor(modelsAssembly));
-                //modelsAssembly = typeof(Catalog_Models.CatalogModels.State.StateItemUpdateRequest).Assembly;
-                //c.IncludeXmlComments(GetXmlDocumentationFileFor(modelsAssembly));
+                // include models xml documentation
+                modelsAssembly = typeof(TagValue).Assembly;
+                c.IncludeXmlComments(GetXmlDocumentationFileFor(modelsAssembly));
+                // include models xml documentation
+                modelsAssembly = typeof(TagValueResponse).Assembly;
+                c.IncludeXmlComments(GetXmlDocumentationFileFor(modelsAssembly));
 
             });
 

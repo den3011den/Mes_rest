@@ -2,6 +2,10 @@
 
 namespace Mes_rest_Models.Mes_restModels
 {
+
+    /// <summary>
+    /// Значение тэга
+    /// </summary>
     public class TagValueResponse
     {
 
