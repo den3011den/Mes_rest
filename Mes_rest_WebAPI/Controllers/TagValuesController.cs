@@ -79,17 +79,24 @@ namespace Mes_rest_WebAPI.Controllers
             if (startTime > endTime)
                 return BadRequest("Время начала интервала дат больше времени его окончания!");
 
-            var tag = await _tagRepository.GetByNameAsync(tagname);
+            try
+            {
+                var tag = await _tagRepository.GetByNameAsync(tagname);
 
-            if (tag == null)
-                return NotFound("Тэг с наименованием \"" + tagname + "\" не найден в справочнике тэгов");
+                if (tag == null)
+                    return NotFound("Тэг с наименованием \"" + tagname + "\" не найден в справочнике тэгов");
 
-            var tagValueList = await _tagValueRepository.GetByTagNameAndTagValueTimeIntervalAsync(tagname, startTime, endTime);
+                var tagValueList = await _tagValueRepository.GetByTagNameAndTagValueTimeIntervalAsync(tagname, startTime, endTime);
 
-            if (tagValueList == null || tagValueList.Count() <= 0)
-                return NotFound("Не найдено значений тэга с наименованием \"" + tagname + "\" за интревал времени с " + startTime.ToString() + " по " + endTime.ToString());
+                if (tagValueList == null || tagValueList.Count() <= 0)
+                    return NotFound("Не найдено значений тэга с наименованием \"" + tagname + "\" за интревал времени с " + startTime.ToString() + " по " + endTime.ToString());
 
-            return Ok(_mapper.Map<IEnumerable<TagValue>, IEnumerable<TagValueResponse>>(tagValueList));
+                return Ok(_mapper.Map<IEnumerable<TagValue>, IEnumerable<TagValueResponse>>(tagValueList));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Ошибка при выполнении запроса: " + ex.Message);
+            }
         }
 
 
@@ -127,20 +134,29 @@ namespace Mes_rest_WebAPI.Controllers
         /// <response code="404">Не удалось найти найти значения за указанный интревал времени</response>  
         [HttpGet("GetByTagValueTimeInterval/{startTime:datetime}/{endTime:datetime}")]
         [ProducesResponseType(typeof(List<TagValueResponse>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
+
         public async Task<ActionResult<List<TagValueResponse>>> GetByTagValueTimeIntervalAsync(DateTime startTime, DateTime endTime)
         {
+
 
             if (startTime > endTime)
                 return BadRequest("Время начала интервала дат больше времени его окончания!");
 
-            var tagValueList = await _tagValueRepository.GetByTagValueTimeIntervalAsync(startTime, endTime);
+            try
+            {
+                var tagValueList = await _tagValueRepository.GetByTagValueTimeIntervalAsync(startTime, endTime);
 
-            if (tagValueList == null || tagValueList.Count() <= 0)
-                return NotFound("Не найдено значений тэгов за интревал времени с " + startTime.ToString() + " по " + endTime.ToString());
+                if (tagValueList == null || tagValueList.Count() <= 0)
+                    return NotFound("Не найдено значений тэгов за интревал времени с " + startTime.ToString() + " по " + endTime.ToString());
 
-            return Ok(_mapper.Map<IEnumerable<TagValue>, IEnumerable<TagValueResponse>>(tagValueList));
+                return Ok(_mapper.Map<IEnumerable<TagValue>, IEnumerable<TagValueResponse>>(tagValueList));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Ошибка при выполнении запроса: " + ex.Message);
+            }
         }
 
 
@@ -166,8 +182,8 @@ namespace Mes_rest_WebAPI.Controllers
         /// <response code="404">Не удалось найти найти значения на указаную метку времени</response>  
         [HttpGet("GetByTagNameAndTagValueTime/{tagname}/{tagValueTime:datetime}")]
         [ProducesResponseType(typeof(List<TagValueResponse>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<List<TagValueResponse>>> GetByTagNameAndTagValueTimeAsync(string tagname, DateTime tagValueTime)
         {
 
@@ -179,12 +195,19 @@ namespace Mes_rest_WebAPI.Controllers
             if (tag == null)
                 return NotFound("Тэг с наименованием \"" + tagname + "\" не найден в справочнике тэгов");
 
-            var tagValueList = await _tagValueRepository.GetByTagNameAndTagValueTimeAsync(tagname, tagValueTime);
+            try
+            {
+                var tagValueList = await _tagValueRepository.GetByTagNameAndTagValueTimeAsync(tagname, tagValueTime);
 
-            if (tagValueList == null || tagValueList.Count() <= 0)
-                return NotFound("Не найдено значений тэга с наименованием \"" + tagname + "\" на метку времени " + tagValueTime.ToString());
+                if (tagValueList == null || tagValueList.Count() <= 0)
+                    return NotFound("Не найдено значений тэга с наименованием \"" + tagname + "\" на метку времени " + tagValueTime.ToString());
 
-            return Ok(_mapper.Map<IEnumerable<TagValue>, IEnumerable<TagValueResponse>>(tagValueList));
+                return Ok(_mapper.Map<IEnumerable<TagValue>, IEnumerable<TagValueResponse>>(tagValueList));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Ошибка при выполнении запроса: " + ex.Message);
+            }
         }
 
     }

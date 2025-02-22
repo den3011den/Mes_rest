@@ -36,12 +36,21 @@ namespace Mes_rest_WebAPI.Controllers
         /// </summary>
         /// <returns>Возвращает список всех тэгов - объекты типа TagResponse</returns>
         /// <response code="200">Успешное выполнение</response>
+        /// <response code="400">Ошибка при выполнении запроса к БД</response>
         [HttpGet("All")]
         [ProducesResponseType(typeof(List<TagResponse>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<List<TagResponse>>> GetAllTagsAsync()
         {
-            var gotTags = await _tagRepository.GetAllAsync();
-            return Ok(_mapper.Map<IEnumerable<Tag>, IEnumerable<TagResponse>>(gotTags));
+            try
+            {
+                var gotTags = await _tagRepository.GetAllAsync();
+                return Ok(_mapper.Map<IEnumerable<Tag>, IEnumerable<TagResponse>>(gotTags));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Ошибка при выполнении запроса: " + ex.Message);
+            }
         }
 
 
@@ -51,18 +60,27 @@ namespace Mes_rest_WebAPI.Controllers
         /// <param name="id">ИД тэга</param>
         /// <returns>Возвращает найденый по ИД тэг - объект типа TagResponse</returns>
         /// <response code="200">Успешное выполнение</response>
+        /// <response code="400">Ошибка при выполнении запроса к БД</response>
         /// <response code="404">Тэг с заданным Id не найден</response>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(TagResponse), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<TagResponse>> GetTagByIdAsync(Int64 id)
         {
-            var tag = await _tagRepository.GetByIdAsync(id);
+            try
+            {
+                var tag = await _tagRepository.GetByIdAsync(id);
 
-            if (tag == null)
-                return NotFound("Тэг с ИД = " + id.ToString() + " не найден!");
+                if (tag == null)
+                    return NotFound("Тэг с ИД = " + id.ToString() + " не найден!");
 
-            return Ok(_mapper.Map<Tag, TagResponse>(tag));
+                return Ok(_mapper.Map<Tag, TagResponse>(tag));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Ошибка при выполнении запроса: " + ex.Message);
+            }
         }
 
         /// <summary>
@@ -71,18 +89,27 @@ namespace Mes_rest_WebAPI.Controllers
         /// <param name="name">Наименование тэга</param>
         /// <returns>Возвращает найденый по наименованию тэг - объект типа TagResponse</returns>
         /// <response code="200">Успешное выполнение</response>
+        /// <response code="400">Ошибка при выполнении запроса к БД</response>
         /// <response code="404">Тэг с заданным наименованием не найден</response>
         [HttpGet("GetByName/{name}")]
         [ProducesResponseType(typeof(TagResponse), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<TagResponse>> GetTagByNameAsync(string name)
         {
-            var tag = await _tagRepository.GetByNameAsync(name);
+            try
+            {
+                var tag = await _tagRepository.GetByNameAsync(name);
 
-            if (tag == null)
-                return NotFound("Тэг с наименованием \"" + name + "\" не найден!");
+                if (tag == null)
+                    return NotFound("Тэг с наименованием \"" + name + "\" не найден!");
 
-            return Ok(_mapper.Map<Tag, TagResponse>(tag));
+                return Ok(_mapper.Map<Tag, TagResponse>(tag));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Ошибка при выполнении запроса: " + ex.Message);
+            }
         }
 
 
@@ -92,18 +119,27 @@ namespace Mes_rest_WebAPI.Controllers
         /// <param name="partOfName">Искомая подстрока в наименовании тэгов</param>
         /// <returns>Возвращает список найденых тэгов - объекты типа TagResponse</returns>
         /// <response code="200">Успешное выполнение</response>
+        /// <response code="400">Ошибка при выполнении запроса к БД</response>
         /// <response code="404">Тэги с заданой подстрокой  в наименовании не найдены</response>
         [HttpGet("GetByPartOfName/{partOfName}")]
         [ProducesResponseType(typeof(List<TagResponse>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<List<TagResponse>>> GetTagByPartOfNameAsync(string partOfName)
         {
-            var gotTags = await _tagRepository.GetByPartOfNameAsync(partOfName);
+            try
+            {
+                var gotTags = await _tagRepository.GetByPartOfNameAsync(partOfName);
 
-            if (gotTags == null || gotTags.Count() == 0)
-                return NotFound("Тэгов с подстрокой \"" + partOfName + "\" в наименовании не найдено!");
+                if (gotTags == null || gotTags.Count() == 0)
+                    return NotFound("Тэгов с подстрокой \"" + partOfName + "\" в наименовании не найдено!");
 
-            return Ok(_mapper.Map<IEnumerable<Tag>, IEnumerable<TagResponse>>(gotTags));
+                return Ok(_mapper.Map<IEnumerable<Tag>, IEnumerable<TagResponse>>(gotTags));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Ошибка при выполнении запроса: " + ex.Message);
+            }
         }
     }
 }
