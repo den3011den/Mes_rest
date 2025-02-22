@@ -12,14 +12,30 @@ using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace Mes_rest_WebAPI
 {
+
+    /// <summary>
+    /// Настройка конфигурации приложения
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Конфигурация приложения
+        /// </summary>
         public IConfiguration Configuration { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+
+        /// <summary>
+        /// Конфигурация сревисов приложения
+        /// </summary>
+        /// <param name="services">Интрефейс коллекции сервисов приложения</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddMvcOptions(x =>
@@ -74,6 +90,11 @@ namespace Mes_rest_WebAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Подключение и настройка middleware pipline
+        /// </summary>
+        /// <param name="app">Интрефейс строителя приложения</param>
+        /// <param name="env">Интерфейс конфигурации</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

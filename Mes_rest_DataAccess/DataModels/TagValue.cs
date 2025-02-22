@@ -33,7 +33,7 @@ namespace Mes_rest_DataAccess.DataModels
 
 
         /// <summary>
-        /// Метка времени значения
+        /// Метка времени регистрации записи о значении в БД
         /// </summary>
         [Comment("Метка времени регистрации записи о значении в БД")]
         [Column("regtimestamp")]
@@ -71,9 +71,9 @@ namespace Mes_rest_DataAccess.DataModels
         public string? StringValue { get; set; }
 
         /// <summary>
-        /// Строковое значение
+        /// Качество значения
         /// </summary>
-        [Comment("Строковое значение")]
+        [Comment("Качество значения")]
         [Column("quality")]
         public int Quality { get; set; }
     }

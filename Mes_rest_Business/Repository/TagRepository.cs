@@ -19,22 +19,22 @@ namespace Mes_rest_Business.Repository
         }
 
         /// <summary>
-        /// Получить тэг по его имени
+        /// Получить тэг по его наименованию
         /// </summary>
-        /// <param name="tagname">Имя тэга</param>
-        /// <returns>Найденый тэг</returns>
-        public async Task<Tag> GetByName(string tagname)
+        /// <param name="tagname">Наименование тэга</param>
+        /// <returns>Найденный тэг</returns>
+        public async Task<Tag> GetByNameAsync(string tagname)
         {
             var tag = await _db.Tags.FirstOrDefaultAsync(u => u.Name == tagname);
             return tag;
         }
 
         /// <summary>
-        /// Поиск тэгов по части наименования
+        /// Найти тэги, содержащие в наименовании указанную подстроку
         /// </summary>
-        /// <param name="partOfTagName">Часть наименования в именах искомых тэгов</param>
+        /// <param name="partOfTagName">Искомая в наименованиях тэгов подстрока</param>
         /// <returns>Список найденых тэгов</returns>
-        public async Task<IEnumerable<Tag>> GetByPartOfName(string partOfTagName)
+        public async Task<IEnumerable<Tag>> GetByPartOfNameAsync(string partOfTagName)
         {
             var tagList = await _db.Tags.Where(u => u.Name.Contains(partOfTagName)).ToListAsync();
             return tagList;

@@ -70,7 +70,7 @@ namespace Mes_rest_WebAPI.Controllers
             [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
             public async Task<ActionResult<TagResponse>> GetTagByNameAsync(string name)
             {
-                var tag = await _tagRepository.GetByName(name);
+                var tag = await _tagRepository.GetByNameAsync(name);
 
                 if (tag == null)
                     return NotFound("Тэг с наименованием \"" + name + "\" не найден!");
@@ -91,7 +91,7 @@ namespace Mes_rest_WebAPI.Controllers
             [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
             public async Task<ActionResult<List<TagResponse>>> GetTagByPartOfNameAsync(string partOfName)
             {
-                var gotTags = await _tagRepository.GetByPartOfName(partOfName);
+                var gotTags = await _tagRepository.GetByPartOfNameAsync(partOfName);
 
                 if (gotTags == null || gotTags.Count() == 0)
                     return NotFound("Тэгов с подстрокой \"" + partOfName + "\" в наименовании не найдено!");
